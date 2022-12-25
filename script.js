@@ -4,15 +4,30 @@ function pageLoaded () {
 
     let canvasWidth = canvas.clientWidth;
     let canvasHeight = canvas.height;
-    let positionX = 0;
-    let positionY = positionX % 2 === 0 ? canvasHeight/2  : canvasHeight/2;
+    let origoX = 0;
+    let origoY = canvasHeight * .5;
+    let peakX = canvasWidth * .5;
+    let peakY = 0;
 
-    context.beginPath();
+    
+    for (i = 0; i < canvasWidth / 3; i++) {
 
-    context.moveTo(positionX,positionY);
-    context.lineTo(positionX,positionY);
-    context.strokeStyle ='rgba(255,0,0,.5)';
-    context.stroke();
+        context.beginPath();        
+
+        context.moveTo(origoX,origoY);
+        context.lineTo(peakX,peakY);
+        context.strokeStyle ='rgba(255,0,0,.5)';
+        context.stroke();
+
+        origoX += 3;  
+
+        if (origoX % 2 === 0) {
+            peakY = 0;   /*The peakY has to be reset to 0 otherwise after the first odds origoX it remains the value of canvasHeight*/
+        } else {
+            peakY = canvasHeight;
+        }
+        
+    }
 
 
 
